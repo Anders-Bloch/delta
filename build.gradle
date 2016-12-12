@@ -12,5 +12,5 @@ dependencies {
 task runScript (dependsOn: 'classes', type: JavaExec) {
     main = 'BuildDataModel'
     classpath = sourceSets.main.runtimeClasspath
-    args '/Users/andersbloch/ml-20m/'
+    args '/Users/andersbloch/Downloads/ml-20m/'
 }

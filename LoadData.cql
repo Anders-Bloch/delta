@@ -44,7 +44,8 @@ MERGE (movie)-[:HAS]->(genre);
 USING PERIODIC COMMIT LOAD CSV FROM "file:///MoviesRatings.csv" AS line 
 MATCH (star:Star {id: toFloat(line[1])}) 
 MATCH (movie:Movie {id: toInt(line[0])}) 
-MERGE (movie)-[s:MOVIE_STAR]->(star) ON CREATE SET s.count = toInt(line[2]), s.users = line[3];
+MERGE (movie)-[s:MOVIE_STAR]->(star)
+ON CREATE SET s.count = toInt(line[2]), s.users = line[3];
 
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:///genome-scores.csv" AS line
@@ -53,9 +54,9 @@ MATCH (movie:Movie {id: toInt(line.movieId)})
 MERGE (movie)-[s:SCORE]->(tag)
 ON CREATE SET s.relevance = toFloat(line.relevance);
 
-#USING PERIODIC COMMIT
-#LOAD CSV WITH HEADERS FROM "file:///ratings.csv" AS line
-#MATCH (user:User {id: toInt(line.userId)})
-#MATCH (movie:Movie {id: toInt(line.movieId)})
-#MERGE (movie)-[r:ratedBy]->(user);
-#ON CREATE SET r.timestamp = line.timestamp, r.rating = toFloat(line.rating);
+//USING PERIODIC COMMIT
+//LOAD CSV WITH HEADERS FROM "file:///ratings.csv" AS line
+//MATCH (user:User {id: toInt(line.userId)})
+//MATCH (movie:Movie {id: toInt(line.movieId)})
+//MERGE (movie)-[r:ratedBy]->(user);
+//ON CREATE SET r.timestamp = line.timestamp, r.rating = toFloat(line.rating);

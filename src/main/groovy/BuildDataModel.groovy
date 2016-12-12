@@ -1,10 +1,14 @@
+import java.nio.file.CopyOption
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
+
 /**
  * Created by andersbloch on 20/11/2016.
  */
 class BuildDataModel {
 
-    def static inputDir = "/Users/andersbloch/ml-20m/"
-    def static outputDir = "/Users/andersbloch/neo4j/import/"
+    def static outputDir = "./dist/"
 
     def static movies = [:]
     static Set<String> genres = []
@@ -14,6 +18,11 @@ class BuildDataModel {
     static Set<String> users = new HashSet<>();
 
     static void main(String[] args) {
+
+        def inputDir = args[0]
+
+        new File(outputDir).mkdir();
+
         new File("${inputDir}movies.csv").eachLine() {line, i ->
             def fields1 = line.split("\"")
             if(fields1.length > 2) {
@@ -49,7 +58,7 @@ class BuildDataModel {
             }
         }
         println "Links file passed..."
-
+/*
         new File("${inputDir}Ratings.csv").eachLine() {links, n ->
             //userId,movieId,rating,timestamp
             def link = links.split(",")
@@ -80,7 +89,7 @@ class BuildDataModel {
             }
         }
         movieRatings.clear()
-        movieRatingsUsers.clear()
+        movieRatingsUsers.clear()*/
         println "MoviesRatings file created..."
 
         new File("${outputDir}Users.csv").withWriter { out ->
@@ -96,18 +105,31 @@ class BuildDataModel {
             }
         }
         println "Movies file created..."
+
+
         new File("${outputDir}Genres.csv").withWriter { out ->
             genres.each{v ->
                 out.println "${v}"
             }
         }
         println "Genres file created..."
+
         new File("${outputDir}MoviesGenres.csv").withWriter { out ->
             relations.each{v ->
                 out.println "${v}"
             }
         }
         println "MoviesGenres file created..."
+
+        CopyOption[] options = [StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES]
+
+        Files.copy(Paths.get("Stars.csv"),Paths.get("${outputDir}Stars.csv"),options)
+        Files.copy(Paths.get("Years.csv"),Paths.get("${outputDir}Years.csv"),options)
+        Files.copy(Paths.get("MovieYear.csv"),Paths.get("${outputDir}MovieYear.csv"),options)
+        Files.copy(Paths.get("${inputDir}genome-tags.csv"),Paths.get("${outputDir}genome-tags.csv"),options)
+        Files.copy(Paths.get("${inputDir}genome-scores.csv"),Paths.get("${outputDir}genome-scores.csv"),options)
+        println "Files copied"
+
     }
 
 

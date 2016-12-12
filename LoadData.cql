@@ -1,10 +1,3 @@
-CREATE INDEX ON :Movie(id);
-CREATE INDEX ON :Genre(name);
-CREATE INDEX ON :Star(id);
-CREATE INDEX ON :Tag(id);
-CREATE INDEX ON :Year(year);
-CREATE INDEX ON :User(id);
-
 USING PERIODIC COMMIT
 LOAD CSV FROM "file:///Genres.csv" AS line
 CREATE (:Genre { name: line[0]});
@@ -28,6 +21,13 @@ CREATE (:Star { id: toFloat(line[0])});
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:///genome-tags.csv" AS line
 CREATE (:Tag { id: toInt(line.tagId), tag: line.tag});
+
+CREATE INDEX ON :Movie(id);
+CREATE INDEX ON :Genre(name);
+CREATE INDEX ON :Star(id);
+CREATE INDEX ON :Tag(id);
+CREATE INDEX ON :Year(year);
+CREATE INDEX ON :User(id);
 
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:///MovieYear.csv" AS line
@@ -53,10 +53,3 @@ MATCH (tag:Tag {id: toInt(line.tagId)})
 MATCH (movie:Movie {id: toInt(line.movieId)})
 MERGE (movie)-[s:SCORE]->(tag)
 ON CREATE SET s.relevance = toFloat(line.relevance);
-
-//USING PERIODIC COMMIT
-//LOAD CSV WITH HEADERS FROM "file:///ratings.csv" AS line
-//MATCH (user:User {id: toInt(line.userId)})
-//MATCH (movie:Movie {id: toInt(line.movieId)})
-//MERGE (movie)-[r:ratedBy]->(user);
-//ON CREATE SET r.timestamp = line.timestamp, r.rating = toFloat(line.rating);

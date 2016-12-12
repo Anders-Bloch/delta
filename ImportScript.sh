@@ -9,6 +9,6 @@ docker cp ./dist/MoviesRatings.csv neo4j:/var/lib/neo4j/import
 docker cp ./dist/Years.csv neo4j:/var/lib/neo4j/import
 docker cp ./dist/MovieYear.csv neo4j:/var/lib/neo4j/import
 docker cp ./dist/Users.csv neo4j:/var/lib/neo4j/import
-docker cp ./dist/neo4j.conf neo4j:/var/lib/neo4j/conf
-docker cp ./dist/neo4j-wrapper.conf neo4j:/var/lib/neo4j/conf
+docker cp neo4j.conf neo4j:/var/lib/neo4j/conf
+docker cp neo4j-wrapper.conf neo4j:/var/lib/neo4j/conf
 docker exec neo4j /var/lib/neo4j/bin/neo4j start

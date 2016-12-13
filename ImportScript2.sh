@@ -1,0 +1,1 @@
+docker cp ./dist/ratings.csv neo4j:/var/lib/neo4j/import

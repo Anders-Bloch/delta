@@ -15,7 +15,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">25</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -26,39 +26,6 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-          <boolProp name="ResultCollector.error_logging">false</boolProp>
-          <objProp>
-            <name>saveConfig</name>
-            <value class="SampleSaveConfiguration">
-              <time>true</time>
-              <latency>true</latency>
-              <timestamp>true</timestamp>
-              <success>true</success>
-              <label>true</label>
-              <code>true</code>
-              <message>true</message>
-              <threadName>true</threadName>
-              <dataType>true</dataType>
-              <encoding>false</encoding>
-              <assertions>true</assertions>
-              <subresults>true</subresults>
-              <responseData>false</responseData>
-              <samplerData>false</samplerData>
-              <xml>false</xml>
-              <fieldNames>false</fieldNames>
-              <responseHeaders>false</responseHeaders>
-              <requestHeaders>false</requestHeaders>
-              <responseDataOnError>false</responseDataOnError>
-              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
-              <assertionsResultsToSave>0</assertionsResultsToSave>
-              <bytes>true</bytes>
-              <threadCounts>true</threadCounts>
-            </value>
-          </objProp>
-          <stringProp name="filename"></stringProp>
-        </ResultCollector>
-        <hashTree/>
         <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
@@ -90,26 +57,32 @@
               <message>true</message>
               <threadName>true</threadName>
               <dataType>true</dataType>
-              <encoding>false</encoding>
+              <encoding>true</encoding>
               <assertions>true</assertions>
               <subresults>true</subresults>
-              <responseData>false</responseData>
-              <samplerData>false</samplerData>
-              <xml>false</xml>
+              <responseData>true</responseData>
+              <samplerData>true</samplerData>
+              <xml>true</xml>
               <fieldNames>false</fieldNames>
-              <responseHeaders>false</responseHeaders>
-              <requestHeaders>false</requestHeaders>
+              <responseHeaders>true</responseHeaders>
+              <requestHeaders>true</requestHeaders>
               <responseDataOnError>false</responseDataOnError>
-              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
+              <url>true</url>
+              <fileName>true</fileName>
+              <hostname>true</hostname>
               <threadCounts>true</threadCounts>
+              <sampleCount>true</sampleCount>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
             </value>
           </objProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent 10 filmtitler fra et år (baseret på årstallet i titlen)" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent 10 filmtitler fra et år (baseret på årstallet i titlen)" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -117,7 +90,7 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
   &quot;query&quot; :&quot;MATCH (m:Movie)--&gt;(y:Year {year: {yearParam}}) return m limit 5&quot;,&#xd;
-  &quot;params&quot; : {&quot;yearParam&quot;:&quot;1995&quot;}&#xd;
+  &quot;params&quot; : {&quot;yearParam&quot;:&quot;${yearValue}&quot;}&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -139,7 +112,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent top 10 (højst ratede – med minimum 10 ratings) filmtitler fra det seneste år (baseret på årstallet i titlen)" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent top 10 (højst ratede – med minimum 10 ratings) filmtitler fra det seneste år (baseret på årstallet i titlen)" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -171,7 +144,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent en specific film (defineret ved movieID) og list alle relationer (title, year, average rating, antal ratings, genre, tags)" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent en specific film (defineret ved movieID) og list alle relationer (title, year, average rating, antal ratings, genre, tags)" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -180,7 +153,7 @@
                 <stringProp name="Argument.value">&#xd;
 {&#xd;
 &quot;query&quot; : &quot;MATCH (m:Movie {id:{movieId}})-[ms:MOVIE_STAR]-(s:Star) with (SUM(toInt(ms.count)*toFloat(s.id)))/SUM(toInt(ms.count)) AS AVG_RATING, SUM(toInt(ms.count)) AS count MATCH (y:Year)--(m:Movie {id:{movieId}})--&gt;(t) return *&quot;,&#xd;
-  &quot;params&quot; : {&quot;movieId&quot;:1}&#xd;
+  &quot;params&quot; : {&quot;movieId&quot;:${movieIdvalue}}&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -202,7 +175,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent alle film med samme givne tags (&gt;0,75 relevans) som filmen (givet ved movieId)" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent alle film med samme givne tags (&gt;0,75 relevans) som filmen (givet ved movieId)" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -210,7 +183,7 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 &quot;query&quot; : &quot;MATCH (m:Movie {id: {movieId}})-[s:SCORE]-&gt;(t:Tag) where toFloat(s.relevance) &gt; {score} with collect(t) AS ts MATCH p=(m:Movie)-[s:SCORE]-(t:Tag) where t IN ts with collect(s) AS rel, ts, m where all(x IN rel WHERE toFloat(x.relevance) &gt; {score}) return m, ts, rel&quot;,&#xd;
-  &quot;params&quot; : {&quot;movieId&quot;:3,&quot;score&quot;:0.75}&#xd;
+  &quot;params&quot; : {&quot;movieId&quot;:${movieIdvalue},&quot;score&quot;:0.75}&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -233,15 +206,15 @@
           <stringProp name="TestPlan.comments">(1000)</stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent de 10 mest populære der har samme genre (givet ved mindst alle genrer) som filmen (givet ved movieId) har" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent de 10 mest populære der har samme genre (givet ved mindst alle genrer) som filmen (givet ved movieId) har" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot; :&quot;MATCH (m:Movie {id: {movieId}})-[h:HAS]-&gt;(g:Genre) with collect(g) AS gen MATCH (s:Star)&lt;-[ms:MOVIE_STAR]-(m2:Movie)-[h2:HAS]-&gt;(g2:Genre) with (SUM(toInt(ms.count)*toFloat(s.id)))/SUM(toInt(ms.count)) AS AVG_RATING, m2, gen, collect(g2) AS gen2 where ALL(x in gen where x IN gen2) return m2, AVG_RATING order by AVG_RATING desc&quot;,&#xd;
-  &quot;params&quot; : {&quot;movieId&quot;:1}&#xd;
+  &quot;query&quot; :&quot;MATCH (m:Movie {id: {movieId}})-[h:HAS]-&gt;(g:Genre) with collect(g) AS gen MATCH (s:Star)&lt;-[ms:MOVIE_STAR]-(m2:Movie)-[h2:HAS]-&gt;(g2:Genre) with (SUM(toInt(ms.count)*toFloat(s.id)))/SUM(toInt(ms.count)) AS AVG_RATING, m2, gen, collect(g2) AS gen2 where ALL(x in gen where x IN gen2) return m2.title, AVG_RATING order by AVG_RATING desc&quot;,&#xd;
+  &quot;params&quot; : {&quot;movieId&quot;:${movieIdvalue}}&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -263,7 +236,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent de 10 højest bedømte (average rating - mindst 10 ratings) film i 2010 (givet ved rating timestamp)" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent de 10 højest bedømte (average rating - mindst 10 ratings) film i 2010 (givet ved rating timestamp)" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -271,7 +244,7 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 &quot;query&quot; : &quot;MATCH (y:Year)&lt;--(m:Movie)-[ms:MOVIE_STAR]-&gt;(s:Star) where y.year = {year} with (SUM(toInt(ms.count)*toFloat(s.id)))/SUM(toInt(ms.count)) AS AVG_RATING, SUM(toInt(ms.count)) AS count, m where count &gt; {count} return m.title order by AVG_RATING desc limit 10&quot;,&#xd;
-  &quot;params&quot; : {&quot;year&quot;:2010,&quot;count&quot;:10}&#xd;
+  &quot;params&quot; : {&quot;year&quot;:${yearValue},&quot;count&quot;:10}&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -293,7 +266,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent de 10 højest bedømte (average rating – mindst 10 ratings) film nogensinde" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent de 10 højest bedømte (average rating – mindst 10 ratings) film nogensinde" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -325,17 +298,15 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent alle film der er bedømt 4 eller derover af bruger (defineret ved userId) " enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent alle film der er bedømt 4 eller derover af bruger (defineret ved userId) " enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-&quot;query&quot; : &quot;MATCH (m:Movie)-[ms:MOVIE_STAR]-&gt;(s:Star) where ms.users CONTAINS &apos;{768:&apos; with (SUM(toInt(ms.count)*toFloat(s.id)))/SUM(toInt(ms.count)) AS AVG_RATING, SUM(toInt(ms.count)) AS count, m where count &gt; 10 AND AVG_RATING &gt;= 4.0 return m.title&quot;,&#xd;
-  &quot;params&quot; : {&#xd;
-   &#xd;
-  }&#xd;
+&quot;query&quot; : &quot;MATCH (m:Movie)-[ms:MOVIE_STAR]-&gt;(s:Star) where ms.users CONTAINS {userId} with (SUM(toInt(ms.count)*toFloat(s.id)))/SUM(toInt(ms.count)) AS AVG_RATING, m where AVG_RATING &gt;= 4.0 return m.title&quot;,&#xd;
+  &quot;params&quot; : {&quot;userId&quot;:&quot;{${movieIdvalue}:&quot;}&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -357,15 +328,15 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent alle film hvor relevans er over en given værdi (relevance &gt; 0,9) for et givent sæt af (3) tags (givet ved tagId’er). " enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent alle film hvor relevans er over en given værdi (relevance &gt; 0,9) for et givent sæt af (3) tags (givet ved tagId’er). " enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-&quot;query&quot; : &quot;MATCH (m:Movie)-[s:SCORE]-&gt;(t:Tag) where (toFloat(s.relevance) &gt; {rating} AND t.id = {tag1}) with collect(m) AS movies MATCH (m2:Movie)-[s2:SCORE]-&gt;(t2:Tag) where toFloat(s2.relevance) &gt; {rating} AND t2.id = {tag2} AND m2 IN movies with collect(m2) AS movies2 MATCH (m3:Movie)-[s3:SCORE]-&gt;(t3:Tag) where toFloat(s3.relevance) &gt; {rating} AND t3.id = {tag3} AND m3 IN movies2 return m3&quot;,&#xd;
-  &quot;params&quot; : {&quot;tag1&quot;:19,&quot;tag2&quot;:159,&quot;tag3&quot;:18,&quot;rating&quot;:0.9}&#xd;
+&quot;query&quot; : &quot;MATCH (m:Movie)-[s:SCORE]-&gt;(t:Tag) where (toFloat(s.relevance) &gt; {rating} AND t.id = {tag1}) with collect(m) AS movies MATCH (m2:Movie)-[s2:SCORE]-&gt;(t2:Tag) where toFloat(s2.relevance) &gt; {rating} AND t2.id = {tag2} AND m2 IN movies with collect(m2) AS movies2 MATCH (m3:Movie)-[s3:SCORE]-&gt;(t3:Tag) where toFloat(s3.relevance) &gt; {rating} AND t3.id = {tag3} AND m3 IN movies2 return m3.title&quot;,&#xd;
+  &quot;params&quot; : {&quot;tag1&quot;:${tag1value},&quot;tag2&quot;:${tag2value},&quot;tag3&quot;:${tag3value},&quot;rating&quot;:0.9}&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -387,7 +358,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent de film der har været bedømt for sidste gang i 2009 (rating time)" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Hent de film der har været bedømt for sidste gang i 2009 (rating time)" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -426,7 +397,7 @@
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-&quot;query&quot; : &quot;MATCH (m:Movie)-[ms:MOVIE_STAR]-&gt;(s:Star) where ms.users =~ &apos;.*\\\\{768:.*&apos; AND s.id &gt;= 4.0 return m.title&quot;,&#xd;
+&quot;query&quot; : &quot;MATCH (m:Movie)-[ms:MOVIE_STAR]-&gt;(s:Star) with split(ms.users, &apos;}:{&apos;) AS list return list&quot;,&#xd;
   &quot;params&quot; : {&#xd;
    &#xd;
   }&#xd;
@@ -450,6 +421,51 @@
           <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="randomMovieId" enabled="true">
+          <stringProp name="maximumValue">100</stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <boolProp name="perThread">false</boolProp>
+          <stringProp name="randomSeed"></stringProp>
+          <stringProp name="variableName">movieIdvalue</stringProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="randomTagValue1" enabled="true">
+          <stringProp name="variableName">tag1value</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="maximumValue">100</stringProp>
+          <stringProp name="randomSeed">20</stringProp>
+          <boolProp name="perThread">false</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="randomTagValue2" enabled="true">
+          <stringProp name="variableName">tag2value</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="maximumValue">100</stringProp>
+          <stringProp name="randomSeed">30</stringProp>
+          <boolProp name="perThread">false</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="randomTagValue3" enabled="true">
+          <stringProp name="variableName">tag3value</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="maximumValue">100</stringProp>
+          <stringProp name="randomSeed">40</stringProp>
+          <boolProp name="perThread">false</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="randomYear" enabled="true">
+          <stringProp name="variableName">yearValue</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">1990</stringProp>
+          <stringProp name="maximumValue">2015</stringProp>
+          <stringProp name="randomSeed"></stringProp>
+          <boolProp name="perThread">false</boolProp>
+        </RandomVariableConfig>
         <hashTree/>
       </hashTree>
     </hashTree>

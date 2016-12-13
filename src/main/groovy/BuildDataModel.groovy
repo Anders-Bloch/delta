@@ -58,19 +58,19 @@ class BuildDataModel {
             }
         }
         println "Links file passed..."
-/*
+
         new File("${inputDir}Ratings.csv").eachLine() {links, n ->
             //userId,movieId,rating,timestamp
             def link = links.split(",")
             if(link[0] != "userId") {
                 users.add(link[0]);
                 def relation = "${link[1]},${link[2]}"
-                def user = "{${link[0]}:${link[3]}}"
+                def user = "${link[0]}:${link[3]}"
                 def count = movieRatings.get(relation)
                 if(!movieRatingsUsers.containsKey(relation)) {
                     movieRatingsUsers.put(relation,new StringBuilder());
                 }
-                movieRatingsUsers.get(relation).append(user).append(":");
+                movieRatingsUsers.get(relation).append(user).append(";");
                 if(count == null) {
                     movieRatings.put(relation,1)
                 } else {
@@ -89,7 +89,7 @@ class BuildDataModel {
             }
         }
         movieRatings.clear()
-        movieRatingsUsers.clear()*/
+        movieRatingsUsers.clear()
         println "MoviesRatings file created..."
 
         new File("${outputDir}Users.csv").withWriter { out ->
@@ -128,6 +128,7 @@ class BuildDataModel {
         Files.copy(Paths.get("MovieYear.csv"),Paths.get("${outputDir}MovieYear.csv"),options)
         Files.copy(Paths.get("${inputDir}genome-tags.csv"),Paths.get("${outputDir}genome-tags.csv"),options)
         Files.copy(Paths.get("${inputDir}genome-scores.csv"),Paths.get("${outputDir}genome-scores.csv"),options)
+        Files.copy(Paths.get("${inputDir}ratings.csv"),Paths.get("${outputDir}ratings.csv"),options)
         println "Files copied"
 
     }

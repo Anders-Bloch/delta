@@ -14,3 +14,20 @@ with collect(m2) AS movies2
 MATCH (m3:Movie)-[s3:SCORE]->(t3:Tag)
 where toFloat(s3.relevance) > 0.9 AND t3.id = 18 AND m3 IN movies2
 return m3;
+
+
+MATCH (m:Movie)-[ms:MOVIE_STAR]->(s:Star)
+with split(replace(replace(ms.users,'[{',''),'}]',''),'}:{') AS list, m
+with extract(x IN list | toInt(split(x,':')[1])) AS l, m
+with filter(x IN l WHERE x > 1421020800 AND x > 1421625599) AS l2, m
+WHERE size(l2) > 0
+return size(l2), m limit 10;
+
+
+MATCH (g:Genre)<--(m:Movie)-[r:RATEDBY]->(u:User)
+
+with extract(x IN list | toInt(split(x,':')[1])) AS l, m
+with filter(x IN l WHERE x > 1421020800 AND x > 1421625599) AS l2, m
+WHERE size(l2) > 0
+return size(l2), m limit 10;
+

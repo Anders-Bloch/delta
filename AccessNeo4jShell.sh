@@ -1,0 +1,1 @@
+docker exec -it neo4j /var/lib/neo4j/bin/neo4j-shell
